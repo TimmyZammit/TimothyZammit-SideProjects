@@ -1,6 +1,13 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const baseHref = location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5500/' : 'https://timmyzammit.github.io/TimothyZammit-SideProjects/';
+    document.querySelector('base').href = baseHref;
+
+    loadHeaderAndInitialize();
+});
+
 // Load header and then initialize header functionalities
 function loadHeaderAndInitialize() {
-    fetch('widgets/header.html')
+    fetch('templates/widgets/header.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('header-placeholder').innerHTML = html;
