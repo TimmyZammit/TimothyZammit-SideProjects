@@ -1,6 +1,6 @@
 // Load header and then initialize header functionalities
 function loadHeaderAndInitialize() {
-    fetch('./templates/widgets/header.html')
+    fetch('widgets/header.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('header-placeholder').innerHTML = html;
