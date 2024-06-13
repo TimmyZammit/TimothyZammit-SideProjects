@@ -25,7 +25,7 @@ function initializeHeaderFunctions() {
     underline.style.bottom = '0';
     underline.style.left = '0';
     underline.style.width = '0';
-    underline.style.borderRadius = '5px'; // Ensures that the underline is rounded
+    underline.style.borderRadius = '5px';
     header.appendChild(underline);
 
     const links = document.querySelectorAll('.header a');
