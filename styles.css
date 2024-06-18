@@ -17,6 +17,7 @@ body{
     width:100vw;
     background-color: var(--white-blue);
     margin:0;
+    overflow-x: hidden;
 }
 
 h1{
@@ -29,12 +30,20 @@ h1{
     width:max-content;
 }
 
+h2{
+    margin:5% 5% 2.5% 5%; /*top,right,bottom,left */
+    width:50%;
+    font-family: 'Inter', sans-serif;
+    color: var(--black-blue);
+}
+
 a:hover{
     color:var(--white-blue);
 }
 
 .header{
     background-color: var(--light-blue);
+    top:0;
     width: 100vw;
     height:fit-content;
     margin:0;
@@ -43,8 +52,10 @@ a:hover{
     align-items: center;
     justify-content: space-between;
     position: relative;
-    overflow-x: auto; /* Allows horizontal scrolling if needed */
-    white-space: nowrap; /* Prevents wrapping of links */
+    overflow-x: hidden;
+    white-space: nowrap;
+    transition: top 0.5s;
+    z-index: 100;
 }
 
 .header::before {
@@ -93,3 +104,79 @@ iframe {
     height: 100%;
     border: none;
 }
+
+.text-left-widget,.text-right-widget{
+    display:flex;
+    width:100%;
+    height:fit-content;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+    padding:0;
+}
+
+
+.image-right,.image-left{
+    width:20%;
+    height:auto;
+    border-radius: 10px;
+    margin :5%;
+}
+
+#timeline-container {
+    position:relative;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    transition: top 0.2s;
+}
+
+.timeline-header {
+    display: flex;
+    align-items: center;
+    position:relative;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    background-color: grey;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.circle.active {
+    background-color: blue;
+}
+
+.line {
+    height: 2px;
+    background-color: grey;
+    width: 50px; /* Adjust according to space available */
+    transition: background-color 0.3s ease;
+}
+
+section {
+    padding: 20px;
+    margin-top: 60px; /* Enough space to see the timeline */
+}
+
+section h1 {
+    margin-top: 0;
+}
+
+#header-timeline-container {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: fit-content;
+    z-index: 100; /* Make sure it stays on top */
+    transition: top 0.3s ease; /* Smooth transition */
+}
+

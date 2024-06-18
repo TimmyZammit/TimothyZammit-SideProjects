@@ -3,15 +3,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('base').href = baseHref;
 
     loadHeaderAndInitialize();
+    initializeScrollBehavior();
 });
 
-// Load header and then initialize header functionalities
 function loadHeaderAndInitialize() {
     fetch('templates/widgets/header.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('header-placeholder').innerHTML = html;
             initializeHeaderFunctions();  // Initialize functions after header is loaded
+            initializeScrollBehavior();
         })
         .catch(err => console.error('Failed to load header: ', err));
 }
@@ -55,5 +56,27 @@ function initializeHeaderFunctions() {
         }
     });
 }
+
+function initializeScrollBehavior() {
+    let lastScrollTop = 0; // Last scroll position
+    const header = document.querySelector('.header'); // Get the header element
+    const container = document.getElementById('header-timeline-container'); // Get the new container
+
+    window.addEventListener("scroll", function() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        let headerHeight = header.offsetHeight; // Dynamically get the height of the header
+
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down
+            container.style.top = `-${headerHeight-4}px`; // Move the entire container up
+        } else {
+            // Scrolling up
+            container.style.top = "0"; // Reset container position
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Avoid negative values
+    });
+}
+
+
 
 document.addEventListener("DOMContentLoaded", loadHeaderAndInitialize);
