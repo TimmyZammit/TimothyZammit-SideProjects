@@ -127,39 +127,59 @@ iframe {
     position:relative;
     left: 0;
     width: 100%;
-    background: white;
+    height:fit-content;
+    background: transparent;
     z-index: 1000;
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
+    padding: 0;
     transition: top 0.2s;
+    font-size: 0;
+    overflow: hidden;
 }
 
-.timeline-header {
+.timeline-cutout-container{
+    width:fit-content;
+    height:20vh;
+}
+
+.timeline-cutout{
+    display: inline-block;
+    width: auto;
+    height:20vh;
+    margin-left:-1px;
+    padding:0;
+}
+
+.filler{
+    flex-grow: 1;
+    background-color: var(--black-blue);
+}
+
+#background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  /* Enough width to cover movement left and right */
+    height: 100%;
     display: flex;
-    align-items: center;
-    position:relative;
+    z-index: 100;
 }
 
-.circle {
-    width: 20px;
-    height: 20px;
-    background-color: grey;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
+.background-right,.background-left {
+    flex-grow: 1;
+    height: 100%;
+    transition: transform 0.3s ease-out;
 }
 
-.circle.active {
-    background-color: blue;
+.background-right {
+    background-color: pink;
+    transform: translateX(0vw);
 }
 
-.line {
-    height: 2px;
-    background-color: grey;
-    width: 50px; /* Adjust according to space available */
-    transition: background-color 0.3s ease;
+.background-left {
+    background-color: red;
+    transform: translateX(0);
 }
 
 section {
@@ -176,6 +196,8 @@ section h1 {
     top: 0px;
     width: 100%;
     height: fit-content;
+    padding:0;
+    margin:0;
     z-index: 100; /* Make sure it stays on top */
     transition: top 0.3s ease; /* Smooth transition */
 }

@@ -1,51 +1,29 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Wait for the header to be fully loaded if it's dynamically injected
-    const headerLoadedInterval = setInterval(function() {
-        const header = document.querySelector('.header');
-        if (header && header.offsetHeight > 0) {
-            clearInterval(headerLoadedInterval);
-            initializeDynamicElements();
-        }
-    }, 100); // Check every 100ms if the header is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const timelineContainer = document.querySelector('.timeline-cutout-container');
+    const bgContainer = document.getElementById('background-container');
 
-    function initializeDynamicElements() {
-        const sections = document.querySelectorAll('section');
-        const circles = document.querySelectorAll('.circle');
-        const lines = document.querySelectorAll('.line');
+    // Function to align the background container based on the timeline container
+    function alignBackgrounds() {
+        const containerRect = timelineContainer.getBoundingClientRect();
+        const offset = containerRect.left;  // Distance from the left of the viewport to the left of the timeline container
+        const totalWidth = document.documentElement.clientWidth; // Width of the viewport
 
-        // Function to manage active sections and timeline highlights
-        function manageTimelineAndSections() {
-            let current = "";
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (window.scrollY >= sectionTop - 50 && window.scrollY < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            console.log(current); // Log the current active section
-
-            circles.forEach((circle) => {
-                circle.classList.remove('active');
-                if (circle.getAttribute('data-link') === current) {
-                    circle.classList.add('active');
-                }
-            });
-
-            lines.forEach((line, index) => {
-                if (index < sections.length - 1) { // Ensure we don't go out of bounds
-                    const nextSection = sections[index + 1];
-                    if (current === sections[index].getAttribute('id') || current === nextSection.getAttribute('id')) {
-                        line.style.backgroundColor = 'blue';
-                    } else {
-                        line.style.backgroundColor = 'grey'; // Reset the line color if needed
-                    }
-                }
-            });
-        }
-
-        // Add scroll event listener for managing timeline and sections
-        window.addEventListener('scroll', manageTimelineAndSections);
+        bgContainer.style.left = `${offset}px`;  // Set left position of the background container
+        bgContainer.style.width = `${totalWidth - offset}px`; // Set width so that it extends from the timeline container's left to the right edge of the viewport
     }
+
+    // Adjust the alignment initially and on resize
+    alignBackgrounds();
+    window.addEventListener('resize', alignBackgrounds);
+
+    // Function to adjust the horizontal position of the background container based on scroll progress
+    document.addEventListener('scroll', function() {
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollPercentage = window.scrollY / maxScroll;
+        // Convert the scroll percentage to a more usable value for transformation
+        const translateX = (scrollPercentage - 0.5) * 200; // Move from -100% to +100% of the container's width
+
+        // Apply the transformation to the background container
+        bgContainer.style.transform = `translateX(${translateX}%)`;
+    });
 });
