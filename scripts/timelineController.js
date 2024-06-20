@@ -1,29 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const timelineContainer = document.querySelector('.timeline-cutout-container');
+    const timelineImages = document.querySelectorAll('.timeline-cutout');
+    const markers = document.querySelectorAll('.text-right-widget, .text-left-widget');
     const bgContainer = document.getElementById('background-container');
+    const backgroundLeft = bgContainer.querySelector('.background-left');
+    const header = document.getElementById('header-timeline-container');
 
-    // Function to align the background container based on the timeline container
-    function alignBackgrounds() {
-        const containerRect = timelineContainer.getBoundingClientRect();
-        const offset = containerRect.left;  // Distance from the left of the viewport to the left of the timeline container
-        const totalWidth = document.documentElement.clientWidth; // Width of the viewport
+    let initialHorizontalShift = 0;  // Variable to store the initial horizontal shift
 
-        bgContainer.style.left = `${offset}px`;  // Set left position of the background container
-        bgContainer.style.width = `${totalWidth - offset}px`; // Set width so that it extends from the timeline container's left to the right edge of the viewport
+    function calculateHorizontalShift() {
+        let currentScroll = window.scrollY + header.offsetHeight;
+        let horizontalShift = 0;
+
+        markers.forEach((marker, index) => {
+            if (index < markers.length - 1) {
+                const nextMarker = markers[index + 1];
+                const currentMarkerTop = marker.offsetTop;
+                const nextMarkerTop = nextMarker.offsetTop;
+                const verticalDistance = nextMarkerTop - currentMarkerTop;
+
+                if (index < timelineImages.length - 1) {
+                    const currentImage = timelineImages[index];
+                    const nextImage = timelineImages[index + 1];
+                    const currentImageRight = currentImage.getBoundingClientRect().right;
+                    const nextImageRight = nextImage.getBoundingClientRect().right;
+                    const horizontalDistance = nextImageRight - currentImageRight;
+
+                    if (currentScroll > currentMarkerTop && currentScroll <= nextMarkerTop) {
+                        const progress = (currentScroll - currentMarkerTop) / verticalDistance;
+                        horizontalShift += progress * horizontalDistance;
+                    } else if (currentScroll > nextMarkerTop) {
+                        horizontalShift += horizontalDistance;
+                    }
+                }
+            }
+        });
+
+        // Adjust bgContainer position based on calculated horizontal shift
+        // Combine initial shift with the dynamic horizontal shift calculated from scroll
+        bgContainer.style.transform = `translateX(${initialHorizontalShift + horizontalShift}px)`;
     }
 
-    // Adjust the alignment initially and on resize
-    alignBackgrounds();
-    window.addEventListener('resize', alignBackgrounds);
+    function setInitialPosition() {
+        const firstImageRight = timelineImages[0].getBoundingClientRect().right;
+        const initialShift = firstImageRight - backgroundLeft.getBoundingClientRect().right;
+        initialHorizontalShift = initialShift;  // Store the initial position shift
+        bgContainer.style.transform = `translateX(${initialShift}px)`;
+    }
 
-    // Function to adjust the horizontal position of the background container based on scroll progress
-    document.addEventListener('scroll', function() {
-        const maxScroll = document.body.scrollHeight - window.innerHeight;
-        const scrollPercentage = window.scrollY / maxScroll;
-        // Convert the scroll percentage to a more usable value for transformation
-        const translateX = (scrollPercentage - 0.5) * 200; // Move from -100% to +100% of the container's width
+    // Set the initial position when the page loads
+    setInitialPosition();
 
-        // Apply the transformation to the background container
-        bgContainer.style.transform = `translateX(${translateX}%)`;
-    });
+    // Recalculate the initial position and adjust on resize
+    window.addEventListener('resize', setInitialPosition);
+
+    // Attach scroll event listener
+    window.addEventListener('scroll', calculateHorizontalShift);
 });

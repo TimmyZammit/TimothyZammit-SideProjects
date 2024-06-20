@@ -140,20 +140,24 @@ iframe {
 
 .timeline-cutout-container{
     width:fit-content;
-    height:20vh;
+    height:10vw;
 }
 
 .timeline-cutout{
     display: inline-block;
     width: auto;
-    height:20vh;
-    margin-left:-1px;
+    height:100%;
+    margin-right:-0.2%;
     padding:0;
 }
 
 .filler{
     flex-grow: 1;
-    background-color: var(--black-blue);
+    background-color: var(--white-blue);
+}
+
+#filler-right{
+    margin-left:-0.1%;
 }
 
 #background-container {
@@ -163,7 +167,7 @@ iframe {
     width: 100%;  /* Enough width to cover movement left and right */
     height: 100%;
     display: flex;
-    z-index: 100;
+    z-index: -100;
 }
 
 .background-right,.background-left {
@@ -172,23 +176,14 @@ iframe {
     transition: transform 0.3s ease-out;
 }
 
-.background-right {
-    background-color: pink;
-    transform: translateX(0vw);
-}
-
 .background-left {
-    background-color: red;
+    background-color: var(--light-blue);
     transform: translateX(0);
 }
 
-section {
-    padding: 20px;
-    margin-top: 60px; /* Enough space to see the timeline */
-}
-
-section h1 {
-    margin-top: 0;
+.background-right {
+    background-color: var(--white-blue);
+    transform: translateX(0);
 }
 
 #header-timeline-container {
@@ -201,4 +196,11 @@ section h1 {
     z-index: 100; /* Make sure it stays on top */
     transition: top 0.3s ease; /* Smooth transition */
 }
+
+.body-container{
+    width:100%;
+    height:fit-content;
+    margin-top:15%;
+}
+
 
