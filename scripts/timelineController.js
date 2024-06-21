@@ -1,11 +1,29 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.onload = function() {
     const timelineImages = document.querySelectorAll('.timeline-cutout');
     const markers = document.querySelectorAll('.text-right-widget, .text-left-widget');
     const bgContainer = document.getElementById('background-container');
+    const start = document.getElementById('start');
     const backgroundLeft = bgContainer.querySelector('.background-left');
+    const backgroundRight = bgContainer.querySelector('.background-right');
+    const timelineCutoutContainer = document.querySelector('.timeline-cutout-container');
     const header = document.getElementById('header-timeline-container');
 
-    let initialHorizontalShift = 0;  // Variable to store the initial horizontal shift
+    let initialHorizontalShift = 0;
+
+    function setInitialPosition() {
+        const timelineContainerWidth = timelineCutoutContainer.offsetWidth;
+        const windowWidth = window.innerWidth;
+
+        // Ensure bgContainer is at least double the width of the timelineCutoutContainer
+        bgContainer.style.width = `${Math.max(windowWidth, 2 * timelineContainerWidth)}px`;
+        backgroundLeft.style.width = `${timelineContainerWidth}px`;
+        backgroundRight.style.width = `${timelineContainerWidth}px`;
+
+        const firstImageRight = timelineImages[0].getBoundingClientRect().right;
+        const initialShift = firstImageRight - backgroundLeft.getBoundingClientRect().right;
+        initialHorizontalShift = initialShift;
+        bgContainer.style.transform = `translateX(${initialShift - start.offsetWidth*0.4}px)`;
+    }
 
     function calculateHorizontalShift() {
         let currentScroll = window.scrollY + header.offsetHeight;
@@ -27,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     if (currentScroll > currentMarkerTop && currentScroll <= nextMarkerTop) {
                         const progress = (currentScroll - currentMarkerTop) / verticalDistance;
-                        horizontalShift += progress * horizontalDistance;
+                        horizontalShift += (progress * horizontalDistance);
                     } else if (currentScroll > nextMarkerTop) {
                         horizontalShift += horizontalDistance;
                     }
@@ -35,24 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Adjust bgContainer position based on calculated horizontal shift
-        // Combine initial shift with the dynamic horizontal shift calculated from scroll
-        bgContainer.style.transform = `translateX(${initialHorizontalShift + horizontalShift}px)`;
+        bgContainer.style.transform = `translateX(${initialHorizontalShift + horizontalShift - start.offsetWidth*0.4}px)`;
     }
 
-    function setInitialPosition() {
-        const firstImageRight = timelineImages[0].getBoundingClientRect().right;
-        const initialShift = firstImageRight - backgroundLeft.getBoundingClientRect().right;
-        initialHorizontalShift = initialShift;  // Store the initial position shift
-        bgContainer.style.transform = `translateX(${initialShift}px)`;
-    }
-
-    // Set the initial position when the page loads
+    // Set initial position and adjust on resize
     setInitialPosition();
-
-    // Recalculate the initial position and adjust on resize
     window.addEventListener('resize', setInitialPosition);
 
     // Attach scroll event listener
     window.addEventListener('scroll', calculateHorizontalShift);
-});
+};

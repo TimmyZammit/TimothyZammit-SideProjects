@@ -140,15 +140,18 @@ iframe {
 
 .timeline-cutout-container{
     width:fit-content;
-    height:10vw;
+    height:9vw;
 }
 
 .timeline-cutout{
     display: inline-block;
     width: auto;
     height:100%;
-    margin-right:-0.2%;
     padding:0;
+}
+
+#skills{
+    margin-right:-0.06%;
 }
 
 .filler{
@@ -156,9 +159,9 @@ iframe {
     background-color: var(--white-blue);
 }
 
-#filler-right{
+/* #filler-right{
     margin-left:-0.1%;
-}
+} */
 
 #background-container {
     position: absolute;
@@ -203,4 +206,19 @@ iframe {
     margin-top:15%;
 }
 
+.side-content-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.body-subtitle{
+    display:flex;
+    width:30%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 2px solid var(--light-blue);
+    border-radius: 2px;
+}
