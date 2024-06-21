@@ -9,10 +9,13 @@ window.onload = function() {
     const header = document.getElementById('header-timeline-container');
 
     let initialHorizontalShift = 0;
+    let startOffset = start.offsetWidth*0.39;
 
     function setInitialPosition() {
+        console.log("reset")
         const timelineContainerWidth = timelineCutoutContainer.offsetWidth;
         const windowWidth = window.innerWidth;
+        startOffset = start.offsetWidth*0.39;
 
         // Ensure bgContainer is at least double the width of the timelineCutoutContainer
         bgContainer.style.width = `${Math.max(windowWidth, 2 * timelineContainerWidth)}px`;
@@ -22,12 +25,12 @@ window.onload = function() {
         const firstImageRight = timelineImages[0].getBoundingClientRect().right;
         const initialShift = firstImageRight - backgroundLeft.getBoundingClientRect().right;
         initialHorizontalShift = initialShift;
-        bgContainer.style.transform = `translateX(${initialShift - start.offsetWidth*0.39}px)`;
+        bgContainer.style.transform = `translateX(${initialShift - startOffset}px)`;
     }
 
     function calculateHorizontalShift() {
         let currentScroll = window.scrollY + header.offsetHeight;
-        let horizontalShift = -start.offsetWidth*0.39;
+        let horizontalShift = -startOffset;
 
         markers.forEach((marker, index) => {
             if (index < markers.length - 1) {
@@ -58,7 +61,17 @@ window.onload = function() {
 
     // Set initial position and adjust on resize
     setInitialPosition();
-    window.addEventListener('resize', setInitialPosition);
+
+    window.addEventListener('resize', () => {
+        if (document.readyState === 'complete') {
+            console.log("complete"+document.readyState)
+            window.location.reload();
+            setInitialPosition();
+        } else {
+            console.log("not complete"+document.readyState)
+            window.onload = setInitialPosition;
+        }
+    });
 
     // Attach scroll event listener
     window.addEventListener('scroll', calculateHorizontalShift);
