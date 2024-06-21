@@ -151,7 +151,7 @@ iframe {
 }
 
 #skills{
-    margin-right:-0.06%;
+    margin-right:-0.07%;
 }
 
 .filler{
@@ -159,9 +159,9 @@ iframe {
     background-color: var(--white-blue);
 }
 
-/* #filler-right{
-    margin-left:-0.1%;
-} */
+#filler-right{
+    margin-left:-0.015%;
+}
 
 #background-container {
     position: absolute;

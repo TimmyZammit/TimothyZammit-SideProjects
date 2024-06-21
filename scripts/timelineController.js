@@ -22,12 +22,12 @@ window.onload = function() {
         const firstImageRight = timelineImages[0].getBoundingClientRect().right;
         const initialShift = firstImageRight - backgroundLeft.getBoundingClientRect().right;
         initialHorizontalShift = initialShift;
-        bgContainer.style.transform = `translateX(${initialShift - start.offsetWidth*0.4}px)`;
+        bgContainer.style.transform = `translateX(${initialShift - start.offsetWidth*0.39}px)`;
     }
 
     function calculateHorizontalShift() {
         let currentScroll = window.scrollY + header.offsetHeight;
-        let horizontalShift = 0;
+        let horizontalShift = -start.offsetWidth*0.39;
 
         markers.forEach((marker, index) => {
             if (index < markers.length - 1) {
@@ -41,7 +41,7 @@ window.onload = function() {
                     const nextImage = timelineImages[index + 1];
                     const currentImageRight = currentImage.getBoundingClientRect().right;
                     const nextImageRight = nextImage.getBoundingClientRect().right;
-                    const horizontalDistance = nextImageRight - currentImageRight;
+                    const horizontalDistance = nextImageRight - currentImageRight+start.offsetWidth*0.135;
 
                     if (currentScroll > currentMarkerTop && currentScroll <= nextMarkerTop) {
                         const progress = (currentScroll - currentMarkerTop) / verticalDistance;
@@ -53,7 +53,7 @@ window.onload = function() {
             }
         });
 
-        bgContainer.style.transform = `translateX(${initialHorizontalShift + horizontalShift - start.offsetWidth*0.4}px)`;
+        bgContainer.style.transform = `translateX(${initialHorizontalShift + horizontalShift}px)`;
     }
 
     // Set initial position and adjust on resize
