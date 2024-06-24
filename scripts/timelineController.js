@@ -1,6 +1,6 @@
 window.onload = function() {
     const timelineImages = document.querySelectorAll('.timeline-cutout');
-    const markers = document.querySelectorAll('.text-right-widget, .text-left-widget');
+    const markers = document.querySelectorAll('.marker');
     const bgContainer = document.getElementById('background-container');
     const start = document.getElementById('start');
     const backgroundLeft = bgContainer.querySelector('.background-left');
