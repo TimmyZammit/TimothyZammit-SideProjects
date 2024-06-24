@@ -38,13 +38,21 @@ window.onload = function() {
                 const currentMarkerTop = marker.offsetTop;
                 const nextMarkerTop = nextMarker.offsetTop;
                 const verticalDistance = nextMarkerTop - currentMarkerTop;
+                let nextImageRight=0;
 
                 if (index < timelineImages.length - 1) {
                     const currentImage = timelineImages[index];
                     const nextImage = timelineImages[index + 1];
                     const currentImageRight = currentImage.getBoundingClientRect().right;
-                    const nextImageRight = nextImage.getBoundingClientRect().right;
-                    const horizontalDistance = nextImageRight - currentImageRight+start.offsetWidth*0.135;
+
+                    if(index==timelineImages.length-2){
+                        nextImageRight = nextImage.getBoundingClientRect().right+startOffset;
+                    }
+                    else{
+                        nextImageRight = nextImage.getBoundingClientRect().right;
+                    }
+
+                    const horizontalDistance = nextImageRight - currentImageRight;
 
                     if (currentScroll > currentMarkerTop && currentScroll <= nextMarkerTop) {
                         const progress = (currentScroll - currentMarkerTop) / verticalDistance;
