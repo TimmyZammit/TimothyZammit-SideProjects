@@ -18,7 +18,7 @@ window.onload = function() {
         startOffset = start.offsetWidth*0.39;
 
         // Ensure bgContainer is at least double the width of the timelineCutoutContainer
-        bgContainer.style.width = `${Math.max(windowWidth, 2 * timelineContainerWidth)}px`;
+        bgContainer.style.width = `${2 * timelineContainerWidth}px`;
         backgroundLeft.style.width = `${timelineContainerWidth}px`;
         backgroundRight.style.width = `${timelineContainerWidth}px`;
 
@@ -37,7 +37,7 @@ window.onload = function() {
                 const nextMarker = markers[index + 1];
                 const currentMarkerTop = marker.offsetTop;
                 const nextMarkerTop = nextMarker.offsetTop;
-                const verticalDistance = nextMarkerTop - currentMarkerTop;
+                let verticalDistance = nextMarkerTop - currentMarkerTop;
                 let nextImageRight=0;
 
                 if (index < timelineImages.length - 1) {
@@ -47,6 +47,17 @@ window.onload = function() {
 
                     if(index==timelineImages.length-2){
                         nextImageRight = nextImage.getBoundingClientRect().right+startOffset;
+
+                        // const markerEndDist = getPositionOfPageEnd()-nextMarkerTop;
+                        // console.log(nextMarkerTop);
+                        // console.log("Position of the end of the page:", getPositionOfPageEnd(), "px from the top");
+                        // console.log(markerEndDist);
+
+                        // if(markerEndDist<-156){
+                        //     console.log("run");
+                        //     verticalDistance= getPositionOfPageEnd()-getDocumentHeight()*0.56;
+                        // }
+
                     }
                     else{
                         nextImageRight = nextImage.getBoundingClientRect().right;
@@ -80,6 +91,22 @@ window.onload = function() {
             window.onload = setInitialPosition;
         }
     });
+
+    // This function returns the total height of the document
+    function getDocumentHeight() {
+        const body = document.body;
+        const html = document.documentElement;
+
+        return Math.max(
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
+        );
+    }
+
+    // This function calculates the position of the end of the page from the top
+    function getPositionOfPageEnd() {
+        return getDocumentHeight() - window.innerHeight;
+    }
 
     // Attach scroll event listener
     window.addEventListener('scroll', calculateHorizontalShift);

@@ -56,6 +56,12 @@ h2{
     font-weight: 100;
 }
 
+.body-container>.side-content-container>
+.text-right-widget>h2{
+    width:80%;
+    margin-top: 2%;
+}
+
 h3{
     margin:0% 5% 0% 5%; /*top,right,bottom,left */
     font-size: 1.8vw;
@@ -113,16 +119,14 @@ h3{
 }
 
 .game-container {
-    width: 100vw; /* 80% of the viewport width */
+    width: 100vw;
     height: 80vh; /* 80% of the viewport height */
-    max-width: 1920px;
-    max-height: 1080px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-    margin: 10% 0vw;
+    margin: 2% 0vw;
 }
 
 iframe {
@@ -140,7 +144,6 @@ iframe {
     margin:0;
     padding:0;
 }
-
 
 .image-right,.image-left{
     width:20%;
@@ -226,7 +229,7 @@ iframe {
     transition: top 0.3s ease; /* Smooth transition */
 }
 
-.body-container{
+.body-container-timeline{
     width:100%;
     height:fit-content;
     margin-top:15%;
@@ -241,7 +244,7 @@ iframe {
 
 .body-subtitle{
     display:flex;
-    width:30%;
+    width:fit-content;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -271,6 +274,7 @@ iframe {
     align-items: center;
     background-color: var(--light-blue);
     border-top: 4px solid var(--black-blue);
+    margin-top: 15%;
 }
 
 .info-widget{
@@ -282,6 +286,12 @@ iframe {
 }
 
 .footer-icons{
-    height: 10vh;
+    height: 4vw;
     width:auto;
+}
+
+.body-container{
+    width:100%;
+    height:fit-content;
+    margin-top:6%;
 }
