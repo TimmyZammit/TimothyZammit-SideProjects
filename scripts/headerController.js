@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const baseHref = location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5500/' : 'https://timmyzammit.github.io/TimothyZammit-SideProjects/';
-    document.querySelector('base').href = baseHref;
+    // const baseHref = location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5500/' : 'https://timmyzammit.github.io/TimothyZammit-SideProjects/';
+    // document.querySelector('base').href = baseHref;
 
     loadHeaderAndInitialize();
     initializeScrollBehavior();
 });
 
 function loadHeaderAndInitialize() {
-    fetch('templates/widgets/header.html')
+    fetch('widgets/header.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('header-placeholder').innerHTML = html;
