@@ -3,6 +3,7 @@
     --light-blue: #0078CE;
     --black-blue: #001626;
     --white-blue: #e8f5ff;
+    --navy      : #D1ECFF;
 }
 
 a{
@@ -219,7 +220,6 @@ iframe {
     width:100%;
     height:fit-content;
     margin-top:15%;
-    padding-bottom:8%;
 }
 
 .side-content-container{

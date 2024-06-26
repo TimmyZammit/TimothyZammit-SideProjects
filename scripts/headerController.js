@@ -45,6 +45,13 @@ function initializeHeaderFunctions() {
             underline.style.left = `${link.offsetLeft}px`;
             underline.style.transition = 'left 0.3s ease, width 0.3s ease';
         });
+        const h1 = link.querySelector('h1'); // Select the h1 within the link
+        if (h1) {
+            h1.addEventListener('click', function() {
+                this.style.color = 'var(--navy)'; // Change the color of h1 to white on click
+                underline.style.backgroundColor = 'var(--navy)'
+            });
+        }
     });
 
     // Reset underline to active link when leaving the header area
