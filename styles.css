@@ -295,3 +295,37 @@ iframe {
     height:fit-content;
     margin-top:6%;
 }
+
+.error{
+    display:none;
+}
+
+@media(max-width:1018px){
+
+    .body-container-timeline{
+        display:none;
+    }
+
+    .body-container{
+        display:none;
+    }
+
+    #header-timeline-container{
+        display:none;
+    }
+
+    .error{
+        display: flex;
+        width:100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .error>h2{
+        width:100%;
+        font-size:5vw;
+    }
+
+}

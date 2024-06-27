@@ -87,3 +87,8 @@ function initializeScrollBehavior() {
 
 
 document.addEventListener("DOMContentLoaded", loadHeaderAndInitialize);
+window.addEventListener('resize', () => {
+    if (document.readyState === 'complete') {
+        window.location.reload();
+    }
+});
