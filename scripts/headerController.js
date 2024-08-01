@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('base').href = baseHref;
 
     loadHeaderAndInitialize();
-    if (window.innerWidth < 1019) {
+    if (window.innerWidth > 1019) {
         initializeScrollBehavior();
     }
 });
