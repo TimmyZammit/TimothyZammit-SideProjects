@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    if (window.innerWidth < 1019) {
-        return; // Exit if the screen width is less than 1019px
-    }
-
     const baseHref = location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5500/' : 'https://timmyzammit.github.io/TimothyZammit-SideProjects/';
     document.querySelector('base').href = baseHref;
 
     loadHeaderAndInitialize();
-    initializeScrollBehavior();
+    if (window.innerWidth < 1019) {
+        initializeScrollBehavior();
+    }
 });
 
 function loadHeaderAndInitialize() {
