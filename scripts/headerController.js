@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     const baseHref = location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5500/' : 'https://timmyzammit.github.io/TimothyZammit-SideProjects/';
     document.querySelector('base').href = baseHref;
 
