@@ -1,6 +1,7 @@
 
 :root{
     --light-blue: #0078CE;
+    --light-blue-trans: #0078ce5e;
     --black-blue: #001626;
     --white-blue: #e8f5ff;
 }
@@ -13,6 +14,7 @@ a{
 }
 
 h2>a{
+    width:fit-content;
     margin:0;
     color: var(--light-blue);
     font-weight: bold;
@@ -300,7 +302,17 @@ iframe {
     display:none;
 }
 
+.menu-container{
+    
+    display: none;
+
+}
+
 @media(max-width:1018px){
+
+    .body-container{
+        margin-top:10%;
+    }
 
     #timeline-container{
         display: none;
@@ -309,10 +321,11 @@ iframe {
     .text-left-widget,.text-right-widget{
 
         flex-direction: column;
+        width: 90vw;
 
     }
 
-    .text-left-widget>img{
+    .text-left-widget>img, .text-right-widget>img {
         order:-1;
     }
 
@@ -320,26 +333,45 @@ iframe {
         font-size: 3.5vw;
     }
 
-    h2{
-        font-size: 3vw;
-        width:auto;
-        padding:0 5vw ; /*top right+left bottom*/
+    .info-widget>h1, .info-widget>a>h1{
+        font-size: 2.6vw;
     }
 
-    .right-header{
+    h2{
+        font-size: 3vw;
+        width:80vw;
+        height:fit-content;
+        margin-left:0;
+        margin-right:0;
+    }
+
+    h3{
+        font-size: 3vw;
+    }
+
+    .sub-section{
+        width:80vw;
+        padding:0;
+        align-content: center;
+        align-items: center;
+    }
+
+    .right-head-flex{
         display: none;
     }
 
     .menu-container {
-        position: relative;
+        width:100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height:100%;
     }
     
     .hamburger-menu {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 30px;
-        height: 24px;
+        margin:0 3vw;
+        width: 10vw;
+        height: 5vw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -347,11 +379,16 @@ iframe {
         z-index: 1001;
     }
     
+    .body-subtitle{
+        width:80%;
+    }
+
     .bar {
-        width: 100%;
-        height: 4px;
-        background-color: #333;
+        width: 80%;
+        height: 1vw;
+        background-color: var(--black-blue);
         transition: all 0.3s;
+        border-radius: 200px;
     }
     
     .fullscreen-menu {
@@ -360,40 +397,53 @@ iframe {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: var(--light-blue-trans);
         display: flex;
         justify-content: center;
         align-items: center;
         transform: translateY(-100%);
         transition: transform 0.5s ease-in-out;
         z-index: 1000;
+        backdrop-filter: blur(5px);
+    }
+
+    .fullscreen-menu>ul>li>h2{
+        margin:0;
     }
     
     .fullscreen-menu ul {
+        width: 100%;
         list-style: none;
         padding: 0;
         margin: 0;
         text-align: center;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
     }
     
     .fullscreen-menu ul li {
-        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 6vh 0;
     }
     
     .fullscreen-menu ul li a {
         text-decoration: none;
-        color: #fff;
-        font-size: 24px;
+        color: var(--black-blue);
+        font-size: 5vw;
         transition: color 0.3s;
     }
     
     .fullscreen-menu ul li a:hover {
-        color: #f39c12;
+        border-bottom: 4px solid var(--black-blue);
+        border-radius: 3px;
     }
     
     /* Hamburger to X transition */
     .hamburger-menu.active .bar:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: rotate(45deg) translate(2.9vw, 0vw);
     }
     
     .hamburger-menu.active .bar:nth-child(2) {
@@ -401,37 +451,11 @@ iframe {
     }
     
     .hamburger-menu.active .bar:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
+        transform: rotate(-45deg) translate(2.9vw, -0vw);
     }
     
     .fullscreen-menu.active {
         transform: translateY(0);
     }
-
-    /* .body-container-timeline{
-        display:none;
-    }
-
-    .body-container{
-        display:none;
-    }
-
-    #header-timeline-container{
-        display:none;
-    }
-
-    .error{
-        display: flex;
-        width:100vw;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-    .error>h2{
-        width:100%;
-        font-size:5vw;
-    } */
 
 }
