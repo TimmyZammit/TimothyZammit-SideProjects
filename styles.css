@@ -405,6 +405,7 @@ iframe {
         transition: transform 0.5s ease-in-out;
         z-index: 1000;
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 
     .fullscreen-menu>ul>li>h2{
